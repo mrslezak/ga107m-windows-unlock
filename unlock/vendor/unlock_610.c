@@ -521,13 +521,41 @@ static int falcon_hs(struct unlock_transaction_work *work, const struct falcon_e
 
 		for (;;) {
 			u32 plm, engine, identity;
+			int pci_ret, cpuctl_ret, plm_ret;
 
-			if (diag_pci_dword(work, false, PCI_VENDOR_ID, &identity) ||
-			    identity != GU_TARGET_PCI_ID ||
-			    read_bar(work, eng->base + 0x100, &engine) || engine == ~0u ||
-			    (engine & 0xffff0000u) == 0xbadf0000u ||
-			    read_bar(work, GU_FEAT_PLM_OFFSET, &plm))
+			pci_ret = diag_pci_dword(work, false, PCI_VENDOR_ID, &identity);
+			if (pci_ret) {
+				dev_err(&work->pdev->dev,
+					"HS wait_plm ENODEV: pci read failed ret=%d id=%#x base=%#x\n",
+					pci_ret, identity, eng->base);
 				return GU_RESULT(-ENODEV);
+			}
+			if (identity != GU_TARGET_PCI_ID) {
+				dev_err(&work->pdev->dev,
+					"HS wait_plm ENODEV: pci id mismatch got=%#x expected=%#x base=%#x\n",
+					identity, GU_TARGET_PCI_ID, eng->base);
+				return GU_RESULT(-ENODEV);
+			}
+			cpuctl_ret = read_bar(work, eng->base + 0x100, &engine);
+			if (cpuctl_ret) {
+				dev_err(&work->pdev->dev,
+					"HS wait_plm ENODEV: cpuctl read failed ret=%d base=%#x\n",
+					cpuctl_ret, eng->base);
+				return GU_RESULT(-ENODEV);
+			}
+			if (engine == ~0u || (engine & 0xffff0000u) == 0xbadf0000u) {
+				dev_err(&work->pdev->dev,
+					"HS wait_plm ENODEV: cpuctl sentinel value=%#x base=%#x\n",
+					engine, eng->base);
+				return GU_RESULT(-ENODEV);
+			}
+			plm_ret = read_bar(work, GU_FEAT_PLM_OFFSET, &plm);
+			if (plm_ret) {
+				dev_err(&work->pdev->dev,
+					"HS wait_plm ENODEV: plm read failed ret=%d offset=%#x base=%#x cpuctl=%#x\n",
+					plm_ret, GU_FEAT_PLM_OFFSET, eng->base, engine);
+				return GU_RESULT(-ENODEV);
+			}
 			/* Cold entry was closed: this transition proves payload execution. */
 			if (plm == ~0u && work->plm_entry != ~0u)
 				return 0;

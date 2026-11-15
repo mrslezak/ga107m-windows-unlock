@@ -20,61 +20,6 @@
                       "sha256":  "f31448f88e14ffb1dd70f128faa2a5ec6df5f59ea3aaf5438d78b50ea0c35afa"
                   },
                   {
-                      "path":  "CHANGES.md",
-                      "bytes":  10126,
-                      "sha256":  "3686bf1ba0b217c70451e864b86632541a0af1e2737834f611c18730035d412f"
-                  },
-                  {
-                      "path":  "LICENSE",
-                      "bytes":  18431,
-                      "sha256":  "189b1af95d661151e054cea10c91b3d754e4de4d3fecfb074c1fb29476f7167b"
-                  },
-                  {
-                      "path":  "LICENSES/CMP40HX-MIT.txt",
-                      "bytes":  1079,
-                      "sha256":  "3d9eb567abded21047833b5a0b5acf827c504d15d191e1ca0129672a45f6a6f7"
-                  },
-                  {
-                      "path":  "LICENSES/EDK2-BSD-2-Clause-Patent.txt",
-                      "bytes":  2732,
-                      "sha256":  "50ce20c9cfdb0e19ee34fe0a51fc0afe961f743697b068359ab2f862b494df80"
-                  },
-                  {
-                      "path":  "LICENSES/NVIDIA-Driver.txt",
-                      "bytes":  22653,
-                      "sha256":  "c692fb14ad4f499c6aee1b9e144e6905148c420e6225b17cb2937366c1e507ad"
-                  },
-                  {
-                      "path":  "LICENSES/NVIDIA-MIT.txt",
-                      "bytes":  1241,
-                      "sha256":  "c83f0e32786652a67625fb0770db09ee46fe1ebefba4790600a5ffce52dbde1d"
-                  },
-                  {
-                      "path":  "README.md",
-                      "bytes":  5136,
-                      "sha256":  "a9831527148ac13288d926b506181968b2a825295071a9ea9d9c83affd62ec5f"
-                  },
-                  {
-                      "path":  "RELEASE-NOTES.md",
-                      "bytes":  1636,
-                      "sha256":  "9e5c5127078f6d78cf22a0565e85bf6d828f1c7f6fdcb8033c7a918df42402f8"
-                  },
-                  {
-                      "path":  "RELEASE-v0.2.0.md",
-                      "bytes":  1940,
-                      "sha256":  "5555e34aaa3035ed2e29e4813e27131a779f1805a4947abfacaa977888f980bd"
-                  },
-                  {
-                      "path":  "SOURCE-MANIFEST.json",
-                      "bytes":  170180,
-                      "sha256":  "75300c95c7842352450b56fd89c3cb31e3629ddf44c360f027bc5b05409153da"
-                  },
-                  {
-                      "path":  "THIRD_PARTY_NOTICES.md",
-                      "bytes":  4401,
-                      "sha256":  "861cbd6426ca25ab3e265469f3c7be9f8c6c705f49b7aecf727f8de3f20fc5b8"
-                  },
-                  {
                       "path":  "benchmark/build.ps1",
                       "bytes":  2710,
                       "sha256":  "8844a94f22b938b07aa203dd463338c33c3c7bd67c650e18e086ded507a921bf"
@@ -98,6 +43,11 @@
                       "path":  "benchmark/upstream-compute-benchmark.cu",
                       "bytes":  4438,
                       "sha256":  "57b04fa8599ce298d58237246b4353e72000ce65d3d75bd406e97d1d26ec0fd2"
+                  },
+                  {
+                      "path":  "CHANGES.md",
+                      "bytes":  13294,
+                      "sha256":  "4e081497f48b66ac50f0ec582eb37b669ef879c2423f356f828e83554761c368"
                   },
                   {
                       "path":  "deps/edk2/License.txt",
@@ -605,11 +555,6 @@
                       "sha256":  "4062d5451d543e40162deb672073cbfa908d029ba9ad1ce1c0b98509c200dd12"
                   },
                   {
-                      "path":  "deps/edk2/MdePkg/Include/IndustryStandard/IScsiBootFirmwareTable.h",
-                      "bytes":  6762,
-                      "sha256":  "fcd99bbaeda649a49ecde65101ef8390c93808bacb3689428264bb4094232a60"
-                  },
-                  {
                       "path":  "deps/edk2/MdePkg/Include/IndustryStandard/IoRemappingTable.h",
                       "bytes":  10242,
                       "sha256":  "086243bc1e9f2e88a94d06fa3f7a690d6a2759456ec9ed92ddae3d8d18093f24"
@@ -688,6 +633,11 @@
                       "path":  "deps/edk2/MdePkg/Include/IndustryStandard/IpmiSsif.h",
                       "bytes":  2467,
                       "sha256":  "a7c2e134eae7caf12c575918b68badc730f41486f0bb010cb0e71876e2ff2e51"
+                  },
+                  {
+                      "path":  "deps/edk2/MdePkg/Include/IndustryStandard/IScsiBootFirmwareTable.h",
+                      "bytes":  6762,
+                      "sha256":  "fcd99bbaeda649a49ecde65101ef8390c93808bacb3689428264bb4094232a60"
                   },
                   {
                       "path":  "deps/edk2/MdePkg/Include/IndustryStandard/LegacyBiosMpTable.h",
@@ -1200,6 +1150,11 @@
                       "sha256":  "9122b3712516407027d71e91f2e62ac816b31d3039b9c36387817085b97489b7"
                   },
                   {
+                      "path":  "deps/edk2/MdePkg/Include/Library/PeimEntryPoint.h",
+                      "bytes":  3410,
+                      "sha256":  "8837a72ff18d8d6248c92cf00d2ac9bb1c0552ddc53f940f907e0cd1f4f5ddaa"
+                  },
+                  {
                       "path":  "deps/edk2/MdePkg/Include/Library/PeiServicesLib.h",
                       "bytes":  20933,
                       "sha256":  "2d37e5c2485a746c2f109aa8d7fec385eec7d6e6e786229c81440908f2591c6c"
@@ -1208,11 +1163,6 @@
                       "path":  "deps/edk2/MdePkg/Include/Library/PeiServicesTablePointerLib.h",
                       "bytes":  2050,
                       "sha256":  "434e9986faf1aa0614969d0b968c712ca79e27745e132be67a2e1540dcec7b52"
-                  },
-                  {
-                      "path":  "deps/edk2/MdePkg/Include/Library/PeimEntryPoint.h",
-                      "bytes":  3410,
-                      "sha256":  "8837a72ff18d8d6248c92cf00d2ac9bb1c0552ddc53f940f907e0cd1f4f5ddaa"
                   },
                   {
                       "path":  "deps/edk2/MdePkg/Include/Library/PerformanceLib.h",
@@ -2210,11 +2160,6 @@
                       "sha256":  "4867e463cc6439cc18870f328ce7249a1ee2e7f9b8c7e82f320c173698168915"
                   },
                   {
-                      "path":  "deps/edk2/MdePkg/Include/Protocol/IScsiInitiatorName.h",
-                      "bytes":  3184,
-                      "sha256":  "023f604d324ddbe5bffb7eaab28dc76e108a05a9cdb6316f1c91b024a9bcc400"
-                  },
-                  {
                       "path":  "deps/edk2/MdePkg/Include/Protocol/IdeControllerInit.h",
                       "bytes":  24444,
                       "sha256":  "050420d0d091f335fc65299ce225bd3f2018de7829e0bd69bf3312eb8b51a190"
@@ -2260,6 +2205,11 @@
                       "sha256":  "c6380e88a0f0b23eb7446d0b80f79dfc68e9d3cd3205567f21e984e2b38c8cc5"
                   },
                   {
+                      "path":  "deps/edk2/MdePkg/Include/Protocol/IScsiInitiatorName.h",
+                      "bytes":  3184,
+                      "sha256":  "023f604d324ddbe5bffb7eaab28dc76e108a05a9cdb6316f1c91b024a9bcc400"
+                  },
+                  {
                       "path":  "deps/edk2/MdePkg/Include/Protocol/Kms.h",
                       "bytes":  81273,
                       "sha256":  "f951fc71a5a83df42161b003dd84980d38c836e1bc2e159abdef0d9da7a38090"
@@ -2290,6 +2240,11 @@
                       "sha256":  "22a008298bb49a9e7d902ae6cd7e402e82501c9d8c9703e7ff5155c1a326303e"
                   },
                   {
+                      "path":  "deps/edk2/MdePkg/Include/Protocol/LoadedImage.h",
+                      "bytes":  3028,
+                      "sha256":  "c8e3e7d2b93b6cec475aea128ec6eec0f0328654037627197ac1cab43febc02b"
+                  },
+                  {
                       "path":  "deps/edk2/MdePkg/Include/Protocol/LoadFile.h",
                       "bytes":  3130,
                       "sha256":  "1f7018047f729838315912f31580deff27b41299073e210de3353fabb5cab95b"
@@ -2298,11 +2253,6 @@
                       "path":  "deps/edk2/MdePkg/Include/Protocol/LoadFile2.h",
                       "bytes":  2926,
                       "sha256":  "5fb84471d8cb14655493f691d7c220c437b99df603e5dbf0fee9dbb4187ace6a"
-                  },
-                  {
-                      "path":  "deps/edk2/MdePkg/Include/Protocol/LoadedImage.h",
-                      "bytes":  3028,
-                      "sha256":  "c8e3e7d2b93b6cec475aea128ec6eec0f0328654037627197ac1cab43febc02b"
                   },
                   {
                       "path":  "deps/edk2/MdePkg/Include/Protocol/ManagedNetwork.h",
@@ -3355,14 +3305,19 @@
                       "sha256":  "09c3a69c2cbfd9566f932ec208958d3f5b32b3c0b9cd1f096b20d606082f864d"
                   },
                   {
+                      "path":  "docs/GA107M.en.md",
+                      "bytes":  7093,
+                      "sha256":  "2d287e3fa9d265a63687be763cb2c91b9dff10608e2ea8b28a7042527fc272f8"
+                  },
+                  {
                       "path":  "docs/GA107M-PERSISTENCE.en.md",
                       "bytes":  4725,
                       "sha256":  "38972a9979e4a848ed8eb091fbbeb7674b716a4ce62278a1d805d6e31935af08"
                   },
                   {
-                      "path":  "docs/GA107M.en.md",
-                      "bytes":  7093,
-                      "sha256":  "2d287e3fa9d265a63687be763cb2c91b9dff10608e2ea8b28a7042527fc272f8"
+                      "path":  "docs/GA107M-VBIOS-FEASIBILITY.en.md",
+                      "bytes":  9469,
+                      "sha256":  "bfac8f0510c1d00958db18370111e74269bf5865e254a168999852c7ad17233b"
                   },
                   {
                       "path":  "docs/GUIDE.en.md",
@@ -3480,29 +3435,9 @@
                       "sha256":  "f56d5cdcee71f8ad0cfb8bc48a61b69b68b2b1c438c5e9263431f79f71a73edc"
                   },
                   {
-                      "path":  "internal-boot/Build.ps1",
-                      "bytes":  1335,
-                      "sha256":  "a4cbad13125c74caf0dcb84fed7f703a7e892ebec43ef552995aa031c62cad07"
-                  },
-                  {
-                      "path":  "internal-boot/Configure.ps1",
-                      "bytes":  2469,
-                      "sha256":  "0f4b876d788f9562fe0e74d12e4651ae84d3056e12afdceca93b0e3360a09213"
-                  },
-                  {
-                      "path":  "internal-boot/Headless.ps1",
-                      "bytes":  13826,
-                      "sha256":  "82931274cb8445909b57b2065fcb53fda54fbe95f9e55544d92c7f96fc540ee2"
-                  },
-                  {
-                      "path":  "internal-boot/Install.ps1",
-                      "bytes":  12372,
-                      "sha256":  "4d34f095e3f2e2da9620dcdd7cbe1ddbc08d6f0fa84481d8a2170133ef54e4de"
-                  },
-                  {
-                      "path":  "internal-boot/README.md",
-                      "bytes":  1095,
-                      "sha256":  "af5c2ae06eb6cb4c89cbc75fd7f5692c7a16177583f03ffd0251d35597c29fed"
+                      "path":  "internal-boot/boot/build.ps1",
+                      "bytes":  2121,
+                      "sha256":  "5f8f6d5e7057d8aa1b5677f26fa1b0dd1db93eb0639b61e72cdab8b31f6cac06"
                   },
                   {
                       "path":  "internal-boot/boot/build-automatic.ps1",
@@ -3523,11 +3458,6 @@
                       "path":  "internal-boot/boot/build-full.ps1",
                       "bytes":  2197,
                       "sha256":  "71a5ce5596ddbad32d6ccadcbd300ceb9dcfaab3ff02b927c2d9f0bf9c769aae"
-                  },
-                  {
-                      "path":  "internal-boot/boot/build.ps1",
-                      "bytes":  2121,
-                      "sha256":  "5f8f6d5e7057d8aa1b5677f26fa1b0dd1db93eb0639b61e72cdab8b31f6cac06"
                   },
                   {
                       "path":  "internal-boot/boot/console-flow.c",
@@ -3620,21 +3550,6 @@
                       "sha256":  "0fd33f3d5ba3721b417e56343749295a62fd9d046131e4fbe3c3e21a59e1bb36"
                   },
                   {
-                      "path":  "internal-boot/boot/test-console.ps1",
-                      "bytes":  1020,
-                      "sha256":  "e4bce8a6415a9f184b214c8915d5aaea9a82984d5eaf1daa2b9c214344e74de9"
-                  },
-                  {
-                      "path":  "internal-boot/boot/test-diagnostic.ps1",
-                      "bytes":  924,
-                      "sha256":  "7e0a52201eb0fc0cb2fcb20f09ab1438e74d70eca970d6b96acdf6a39667e9a9"
-                  },
-                  {
-                      "path":  "internal-boot/boot/test-full.ps1",
-                      "bytes":  2110,
-                      "sha256":  "edaa9438012bb90bf472d4c716d72d72b5e481755908a254b1a9bbc8f2fa4a04"
-                  },
-                  {
                       "path":  "internal-boot/boot/test.ps1",
                       "bytes":  1013,
                       "sha256":  "0293014a4e9174b2050212673d25040b063f8c7dcf06003d55944538d333d7da"
@@ -3675,9 +3590,44 @@
                       "sha256":  "d6b74b0b5c8d8d0cc48b0395eda5e9f11f347cf95a4be22574ce46ba39c431e9"
                   },
                   {
+                      "path":  "internal-boot/boot/test-console.ps1",
+                      "bytes":  1020,
+                      "sha256":  "e4bce8a6415a9f184b214c8915d5aaea9a82984d5eaf1daa2b9c214344e74de9"
+                  },
+                  {
+                      "path":  "internal-boot/boot/test-diagnostic.ps1",
+                      "bytes":  924,
+                      "sha256":  "7e0a52201eb0fc0cb2fcb20f09ab1438e74d70eca970d6b96acdf6a39667e9a9"
+                  },
+                  {
+                      "path":  "internal-boot/boot/test-full.ps1",
+                      "bytes":  2110,
+                      "sha256":  "edaa9438012bb90bf472d4c716d72d72b5e481755908a254b1a9bbc8f2fa4a04"
+                  },
+                  {
+                      "path":  "internal-boot/Build.ps1",
+                      "bytes":  1335,
+                      "sha256":  "a4cbad13125c74caf0dcb84fed7f703a7e892ebec43ef552995aa031c62cad07"
+                  },
+                  {
+                      "path":  "internal-boot/Configure.ps1",
+                      "bytes":  2469,
+                      "sha256":  "0f4b876d788f9562fe0e74d12e4651ae84d3056e12afdceca93b0e3360a09213"
+                  },
+                  {
                       "path":  "internal-boot/efi_runtime.c",
                       "bytes":  490,
                       "sha256":  "8949b6cacbdf2f41c7248a4b290c6c2bb7c19cb1a231699fd310d1e526e2d3f4"
+                  },
+                  {
+                      "path":  "internal-boot/Headless.ps1",
+                      "bytes":  13826,
+                      "sha256":  "82931274cb8445909b57b2065fcb53fda54fbe95f9e55544d92c7f96fc540ee2"
+                  },
+                  {
+                      "path":  "internal-boot/Install.ps1",
+                      "bytes":  12372,
+                      "sha256":  "4d34f095e3f2e2da9620dcdd7cbe1ddbc08d6f0fa84481d8a2170133ef54e4de"
                   },
                   {
                       "path":  "internal-boot/install/automatic-policy.ps1",
@@ -3703,6 +3653,11 @@
                       "path":  "internal-boot/install/test-headless-package.ps1",
                       "bytes":  13344,
                       "sha256":  "bc694328ae96e5c73fa7037ac87a67db5ec92956212b1e48ccbc72fb3467d0f2"
+                  },
+                  {
+                      "path":  "internal-boot/README.md",
+                      "bytes":  1095,
+                      "sha256":  "af5c2ae06eb6cb4c89cbc75fd7f5692c7a16177583f03ffd0251d35597c29fed"
                   },
                   {
                       "path":  "internal-boot/unlock/app.c",
@@ -4120,6 +4075,36 @@
                       "sha256":  "012e0dbbf406818182a88828ae9be86ea09f55ee8091fe19ddc56e44cd65e328"
                   },
                   {
+                      "path":  "LICENSE",
+                      "bytes":  18431,
+                      "sha256":  "189b1af95d661151e054cea10c91b3d754e4de4d3fecfb074c1fb29476f7167b"
+                  },
+                  {
+                      "path":  "LICENSES/CMP40HX-MIT.txt",
+                      "bytes":  1079,
+                      "sha256":  "3d9eb567abded21047833b5a0b5acf827c504d15d191e1ca0129672a45f6a6f7"
+                  },
+                  {
+                      "path":  "LICENSES/EDK2-BSD-2-Clause-Patent.txt",
+                      "bytes":  2732,
+                      "sha256":  "50ce20c9cfdb0e19ee34fe0a51fc0afe961f743697b068359ab2f862b494df80"
+                  },
+                  {
+                      "path":  "LICENSES/NVIDIA-Driver.txt",
+                      "bytes":  22653,
+                      "sha256":  "c692fb14ad4f499c6aee1b9e144e6905148c420e6225b17cb2937366c1e507ad"
+                  },
+                  {
+                      "path":  "LICENSES/NVIDIA-MIT.txt",
+                      "bytes":  1241,
+                      "sha256":  "c83f0e32786652a67625fb0770db09ee46fe1ebefba4790600a5ffce52dbde1d"
+                  },
+                  {
+                      "path":  "README.md",
+                      "bytes":  5136,
+                      "sha256":  "a9831527148ac13288d926b506181968b2a825295071a9ea9d9c83affd62ec5f"
+                  },
+                  {
                       "path":  "release/EFI/BOOT/BOOTX64.EFI",
                       "bytes":  67584,
                       "sha256":  "f5cbf7ae2884d2707ee888589f725b18bbc8b0f9672a511e3467ada02af6b0f5"
@@ -4130,9 +4115,14 @@
                       "sha256":  "3d0a8a201045acc820c68f52c7a7cd8dd9bc58370af48ba9379d450d2826691b"
                   },
                   {
-                      "path":  "research/headless/README.ko.md",
-                      "bytes":  25800,
-                      "sha256":  "ff5c950c4e78792e46527a32ad94a9c51e1a9488f7152cc838032e4fb19a9c63"
+                      "path":  "RELEASE-NOTES.md",
+                      "bytes":  1636,
+                      "sha256":  "9e5c5127078f6d78cf22a0565e85bf6d828f1c7f6fdcb8033c7a918df42402f8"
+                  },
+                  {
+                      "path":  "RELEASE-v0.2.0.md",
+                      "bytes":  1940,
+                      "sha256":  "5555e34aaa3035ed2e29e4813e27131a779f1805a4947abfacaa977888f980bd"
                   },
                   {
                       "path":  "research/headless/analyze_capture.py",
@@ -4155,14 +4145,14 @@
                       "sha256":  "b332c6b0b8c6a9283dd9c47ece0783ff132aa745d6730c1e7c2f072a7fdfaaa2"
                   },
                   {
+                      "path":  "research/headless/README.ko.md",
+                      "bytes":  25800,
+                      "sha256":  "ff5c950c4e78792e46527a32ad94a9c51e1a9488f7152cc838032e4fb19a9c63"
+                  },
+                  {
                       "path":  "research/headless/register-observe.ps1",
                       "bytes":  9913,
                       "sha256":  "71c582e8bbf8f8e243969849eec004f424b9a352c3c087cf5cc7e7604c57a747"
-                  },
-                  {
-                      "path":  "research/headless/test-full.ps1",
-                      "bytes":  1979,
-                      "sha256":  "87d0e1348492ef7d1555280023d4504fc2d0d6c2b062d4a108450fc546bd9994"
                   },
                   {
                       "path":  "research/headless/test_analyze_capture.py",
@@ -4170,9 +4160,24 @@
                       "sha256":  "86059f0cf22fd4297375dc557969a394cacb61be8d361242bf3483659e354211"
                   },
                   {
+                      "path":  "research/headless/test-full.ps1",
+                      "bytes":  1979,
+                      "sha256":  "87d0e1348492ef7d1555280023d4504fc2d0d6c2b062d4a108450fc546bd9994"
+                  },
+                  {
                       "path":  "research/headless/update-r2-auto.ps1",
                       "bytes":  6515,
                       "sha256":  "693e70b9eb3db1848403ceca7ec0b8752cde61a398ea2910f45fbee8b685f5d9"
+                  },
+                  {
+                      "path":  "SOURCE-MANIFEST.json",
+                      "bytes":  170180,
+                      "sha256":  "75300c95c7842352450b56fd89c3cb31e3629ddf44c360f027bc5b05409153da"
+                  },
+                  {
+                      "path":  "THIRD_PARTY_NOTICES.md",
+                      "bytes":  4401,
+                      "sha256":  "861cbd6426ca25ab3e265469f3c7be9f8c6c705f49b7aecf727f8de3f20fc5b8"
                   },
                   {
                       "path":  "tools/bench_gemm.py",
@@ -4183,6 +4188,11 @@
                       "path":  "tools/collect_compatibility.py",
                       "bytes":  6498,
                       "sha256":  "1447a60aaad211c830702b9fa50765e32d8f957d326d15a9f1a6f0817b8be5cf"
+                  },
+                  {
+                      "path":  "tools/compare_vbios.py",
+                      "bytes":  8467,
+                      "sha256":  "0a307f85fd859972d4e2598ea902196e917c9f154fbc06b1e4301510e32ad0c4"
                   },
                   {
                       "path":  "tools/ga107m-parse-preflight.py",
@@ -4210,9 +4220,44 @@
                       "sha256":  "b8a464011c15bf732a937c4365b9851cdcc345b0c1fd589a5165364022a4de2c"
                   },
                   {
+                      "path":  "tools/test_compare_vbios.py",
+                      "bytes":  2778,
+                      "sha256":  "99dc25ad7f3f46cef0241083ac3f80e978fcd91c9c6ae7fc058cdce7918e1b3b"
+                  },
+                  {
                       "path":  "tools/test_prepare_usb.py",
                       "bytes":  4326,
                       "sha256":  "38024120f7bf0f12ee70002507fc3a4e99acc87f2d549919b368b7092a60faf8"
+                  },
+                  {
+                      "path":  "tools/test_vbios_devinit.py",
+                      "bytes":  3221,
+                      "sha256":  "ab099c1117451ca35c13490476b84bff78a40e0e5859439b3a6136850995589f"
+                  },
+                  {
+                      "path":  "tools/test_vbios_patch.py",
+                      "bytes":  5955,
+                      "sha256":  "f897db410ac4de0834a4edb0e7678c7e3eec14d4aa963b6410978d4dabc1f5be"
+                  },
+                  {
+                      "path":  "tools/test_vbios_vault.py",
+                      "bytes":  4484,
+                      "sha256":  "75556c7f9407da26a9560b389ca894a397889fb334b6462d17ecb5f7147dc2e7"
+                  },
+                  {
+                      "path":  "tools/vbios_devinit.py",
+                      "bytes":  6495,
+                      "sha256":  "9f3b450a89f4f957deb75ab579694363a788057da916b294ff41dc7fc1138880"
+                  },
+                  {
+                      "path":  "tools/vbios_patch.py",
+                      "bytes":  9824,
+                      "sha256":  "053ba01699e0a7fd9ba21484e472487456922a3d8f4cb3d12701e623a4c07291"
+                  },
+                  {
+                      "path":  "tools/vbios_vault.py",
+                      "bytes":  6610,
+                      "sha256":  "17ffbaf492e1b53c62e181419ea23a850d4f96ed0a6507ed3d1abdd0518bded1"
                   },
                   {
                       "path":  "unlock/app.c",
@@ -4240,14 +4285,14 @@
                       "sha256":  "644849b375f7c37f0a46118aac1d55c8c1428b0c29cc017fcaa94b462cc924b0"
                   },
                   {
-                      "path":  "unlock/build-wsl.sh",
-                      "bytes":  2372,
-                      "sha256":  "1df9252c4038f1001650d9859812a6d0d0a8c55096ada60442d79eee86897025"
-                  },
-                  {
                       "path":  "unlock/build.ps1",
                       "bytes":  4533,
                       "sha256":  "da562766957ea09e37a82daff6c32bb508fa08aaee96f557598ac5461f1ef0af"
+                  },
+                  {
+                      "path":  "unlock/build-wsl.sh",
+                      "bytes":  2372,
+                      "sha256":  "1df9252c4038f1001650d9859812a6d0d0a8c55096ada60442d79eee86897025"
                   },
                   {
                       "path":  "unlock/checks.c",
@@ -4435,16 +4480,6 @@
                       "sha256":  "5bcdb4a733c06663cc821e4f7bc8eb05be5b6ba9f608eaa2132d82fe4b17a20f"
                   },
                   {
-                      "path":  "unlock/test-sha.cmd",
-                      "bytes":  1334,
-                      "sha256":  "eefc33449cf758c35c071e7cadfdd23a42c32457056a183b98ce283326d1c861"
-                  },
-                  {
-                      "path":  "unlock/test-transaction.cmd",
-                      "bytes":  726,
-                      "sha256":  "53d698ca7be32d885d4a180910efcc866933eee839dbc7d3a1aa61940eb488df"
-                  },
-                  {
                       "path":  "unlock/tests/check_fwsec_sequence.py",
                       "bytes":  2916,
                       "sha256":  "9106bf55c9f02433c92e2f2fdd27ddb8c249444e5884db90b90aef15c4cd9eb1"
@@ -4613,6 +4648,16 @@
                       "path":  "unlock/tests/transaction_shim/vbios_fixture.h",
                       "bytes":  1225,
                       "sha256":  "485cbd790ef7e2971bb252cbc9461d3c98bebdb69beeb6d4eaa7b7edb7bcf12b"
+                  },
+                  {
+                      "path":  "unlock/test-sha.cmd",
+                      "bytes":  1334,
+                      "sha256":  "eefc33449cf758c35c071e7cadfdd23a42c32457056a183b98ce283326d1c861"
+                  },
+                  {
+                      "path":  "unlock/test-transaction.cmd",
+                      "bytes":  726,
+                      "sha256":  "53d698ca7be32d885d4a180910efcc866933eee839dbc7d3a1aa61940eb488df"
                   },
                   {
                       "path":  "unlock/vendor/diagnostic.h",

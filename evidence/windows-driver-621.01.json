@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-14",
+  "source": "https://us.download.nvidia.com/Windows/621.01/621.01-notebook-win10-win11-64bit-international-dch-whql.exe",
+  "installer": {
+    "size": 1037190000,
+    "sha256": "9624c64705d8c6b0fb034c69faf176f2c85c804c434e478b15e6ca4e00965211",
+    "windows_authenticode_status": "Valid",
+    "signer_organization": "NVIDIA Corporation",
+    "executed": false
+  },
+  "files": [
+    {"name": "nvlddmkm.sys", "size": 102231272, "sha256": "3f8d33495cabeb2fa11ebdcf0b12705e9ccfb4e53005324bcd86e9dea8ba2ab4", "windows_authenticode_status": "Valid"},
+    {"name": "nvapi64.dll", "size": 560200, "sha256": "24b2bd04ad44855a92f541b42970eeb345ecb9bb9a542c8201faa3e165a0403a"},
+    {"name": "nvapi64_impl.dll", "size": 5688528, "sha256": "46586752524af6075736eb655bb3a1da4030dfa42e6b6872afab400d50f249e7"},
+    {"name": "gsp_ga10x.bin", "size": 18262168, "sha256": "6c4de07caa7f494a44419f3cad67bfda95de4304f057985da03cd7756a1c533d"},
+    {"name": "nvcoproc.bin", "size": 12723668, "sha256": "1c27d457deb81060f4b7ebd223e002096b8d622a553f46d4bda4df36ade76858"},
+    {"name": "ucodes_ga10x.bin", "size": 56128512, "sha256": "0622d13a9f18d7d1d6c232736a06239ef367474ee447bbf29758fb8091c36df4"},
+    {"name": "NV_DISP.CAT", "size": 6140866, "sha256": "51b1cd817be88d12f213fe7212fbc504c109fad4915e7ee3fe8d77ae68fb2bb2"}
+  ],
+  "device_manifest": {
+    "file": "Display.Driver/nvtfi.inf",
+    "driver_version": "32.0.16.2101",
+    "hardware_id": "PCI\\VEN_10DE&DEV_25A2&SUBSYS_11401D05",
+    "matches": [{"line": 413, "section": "Section131"}, {"line": 688, "section": "Section132"}],
+    "note": "INF presence does not identify which install section was selected on the personal laptop."
+  },
+  "static_trace": {
+    "image_base": "0x140000000",
+    "coordinates": "RVA in nvlddmkm.sys with the exact hash above; not portable patch offsets",
+    "vbios_string_file_offset": "0xd5d730",
+    "vbios_string_rva": "0xd5df30",
+    "reader_fragment": ["0x1864e0", "0x18708c"],
+    "size_query_call_rva": "0x186a60",
+    "size_query_callee_rva": "0xf3060",
+    "buffer_query_call_rva": "0x186aad",
+    "buffer_query_callee_rva": "0xf2f30",
+    "buffer_field_offset": "0x2b8",
+    "size_field_offset": "0x2c0",
+    "image_parser_call_rva": "0x186e3a",
+    "image_parser_entry_rva": "0x18a3b0",
+    "image_parser_continuation_rva": "0x18a43c",
+    "bit_scan_entry_rva": "0x184ef0",
+    "bit_scan_continuation_rva": "0x184f22",
+    "post_parse_dispatch": {
+      "staging_call_rva": "0x186f5d",
+      "staging_entry_rva": "0x5fe760",
+      "execution_call_rva": "0x186f76",
+      "execution_entry_rva": "0x185030",
+      "policy_fragment_rva": ["0x189cce", "0x18a390"],
+      "reader_helpers": [
+        {"name": "size_query_inferred", "entry_rva": "0x0f3060", "call_rva": "0x186a60"},
+        {"name": "buffer_query_inferred", "entry_rva": "0x0f2f30", "call_rva": "0x186aad"}
+      ],
+      "devinit_policy_reads": [
+        {"key": "RMExecuteDevinitOnPmu", "xrefs": ["0x18a038"]},
+        {"key": "RMDevinitBySecureBoot", "xrefs": ["0x18a122", "0xa35d0e", "0xa35d2f"]}
+      ],
+      "policy_flag_offsets": ["0x298", "0x2a5", "0x2a6", "0x2a7"],
+      "policy_to_dispatch_gates": [
+        {"set_at": "0x18a038", "source": "RMExecuteDevinitOnPmu", "updates": ["byte[+0x298]"]},
+        {"set_at": "0x18a122", "source": "RMDevinitBySecureBoot", "updates": ["byte[+0x298]", "byte[+0x2a5]", "byte[+0x2a6]", "byte[+0x2a7]"]},
+        {"checked_at": "0x18fda1", "predicate": "byte[+0x298] != 0", "effect": "required before writer-branch dispatch"},
+        {"checked_at": "0x18fbc7", "predicate": "byte[+0x2a7] == 0", "effect": "must pass before writer-branch dispatch"},
+        {"checked_at": "0x18fdaf", "predicate": "byte[+0x1634]", "effect": "selects branch to 0x5f1780 (nonzero) or 0x5f0ad0 (zero)"}
+      ],
+      "first_mmio_capable_writer_candidate": {
+        "branch_dispatch_rva": ["0x18fdce", "0x18fde5"],
+        "branch_targets": ["0x5f1780", "0x5f0ad0"],
+        "write_like_leaf_candidate": {
+          "rva": "0x5f16e7",
+          "instruction": "call qword ptr [rip + 0x86c3bb]",
+          "context": "inside 0x5f15b0 helper reached from 0x5f1780"
+        }
+      },
+      "branch_roles": {
+        "0x5f1780": "execute+parse: parses override buffer into object fields +0x15xx/+0x16xx, then performs engine operations via CFG-guarded HAL dispatch (13 such calls)",
+        "0x5f0ad0": "parse-only variant: populates object fields +0x1578..+0x15d8 via byte extractors (0x18c6e0 -> 0x5e5420) and 0x1c09d0; no HAL execute dispatch on its own frames",
+        "selected_when": "byte[+0x1634] nonzero selects 0x5f1780; zero selects 0x5f0ad0"
+      },
+      "dispatch_mechanism": {
+        "cfg_guard_thunk_rva": "0xd46290",
+        "cfg_guard_thunk_body": "jmp rax (Control-Flow-Guard _guard_dispatch_icall)",
+        "hal_pointer_slot_rva": "0xe5daa8",
+        "hal_fn_ptr_object_offsets": ["+0x158", "+0x160", "+0x198", "+0x1a8", "+0x1d8", "+0x320", "+0x638", "+0x640", "+0xbc8", "+0x750"],
+        "register_aperture_base_lookup_rva": "0x1c0db0",
+        "register_address_compute_rva": "0x1c0a20",
+        "note": "Engine writes route through runtime-populated HAL function pointers dispatched via CFG guard, with register addresses resolved through a BAR-aperture mapping layer. The concrete selector-writing instruction is therefore not a static literal and cannot be named from this image alone."
+      },
+      "hal_wiring": {
+        "wiring_routine_rva": "0x187380",
+        "wiring_caller_rva": "0x18c650",
+        "wiring_call_site_rva": "0x18c699",
+        "enable_gate": "byte[rcx+0xabc] == 1 and virtual call qword ptr [rdx+0x1e8] returns nonzero",
+        "install_style": "fixed lea [rip+const] function addresses assembled into a 0x20-stride descriptor array (rbp-0x80..rbp+0x378), then registered via collection inserts",
+        "devinit_cluster_functions_installed": 31,
+        "installed_function_rvas": ["0x5eedb0", "0x607880", "0x607680", "0x5e4b10", "0x607c50", "0x60d6f0", "0x5eef70", "0x5fb190", "0x5faf80", "0x5f9d00", "0x5fa9b0", "0x5f9960", "0x5fa0a0", "0x5f93e0", "0x5f9790", "0x5f8ae0", "0x5f9040", "0x5f9b30", "0x5fa270", "0x5fa440", "0x5fa610", "0x5fa7e0", "0x5f95c0", "0x5f8e70", "0x5f9210", "0x5f9ed0", "0x5fac20", "0x5f8ca0", "0x5ee9e0", "0x607a90", "0x5f13f0"],
+        "override_parser_in_table": "0x5f13f0",
+        "runtime_determinism": "The wiring uses compile-time-constant function addresses with no data-driven or chip-ID-indexed lookup. The runtime slot contents are therefore fully determined by this static code; observing a live process cannot reveal different slot targets.",
+        "note": "This identifies the devinit step/handler registry and the fixed functions it installs. It does not by itself prove which installed function issues the SS0/SS1 write, its privilege, or latch timing."
+      },
+      "selector_write_locus": {
+        "host_driver_selector_literals": {
+          "0x82381c_SS0": 0,
+          "0x823820_SS1": 0,
+          "0x823804_PLM": 0,
+          "only_selector_window_literal": {"rva": "0x9f7ee6", "addr": "0x823814", "access": "register read, bit16 extract, via helper 0x12e5f0", "note": "a read of a neighboring feature bit, not SS0/SS1 and not a write"}
+        },
+        "reg_access_primitive_rva": "0x12e5f0",
+        "reg_offset_passing": "register MMIO offset is passed as an argument (r9d) to the access helper; known offsets appear as caller literals, so SS0/SS1 writes would be literal-visible if performed host-side",
+        "host_conclusion": "No installed devinit slot function reaches an aperture-mapped store with an SS0/SS1 selector address. The host driver does not program SS0/SS1 by literal in GSP mode.",
+        "gsp_aperture_remap_table": {
+          "firmware_file": "gsp_ga10x.bin",
+          "container": "RISC-V (EM_RISCV) 64-bit ELF; single .fwimage section is the GSP-RM firmware_bin (LibOS riscv64), fwversion 620.67.01, with per-chip signature sections including .fwsignature_ga10x",
+          "code_is_encrypted": "The .fwimage code/most data is high-entropy (H~7.0-7.2) and signed, so RISC-V instructions are not in cleartext and cannot be disassembled from this file. Only specific structured tables are cleartext (H<4).",
+          "record_format": "24 bytes: {gsp_window_base:u32, 0, host_regblock_base:u32, count:u32, flags:u32, 0}",
+          "feature_block_record_offset": "0xfd3def",
+          "feature_block": {"host_regblock_base": "0x823800", "gsp_window_base": "0x85c00000", "flags": "0x1100"},
+          "neighbor_records": [
+            {"host_regblock_base": "0x830800", "gsp_window_base": "0x85800000"},
+            {"host_regblock_base": "0x816800", "gsp_window_base": "0x86000000"},
+            {"host_regblock_base": "0x809800", "gsp_window_base": "0x86400000"}
+          ],
+          "gsp_side_selectors": {"SS0": "0x85c0001c", "SS1": "0x85c00020", "PLM": "0x85c00004"},
+          "gsp_literal_evidence": {
+            "window_base_0x85c00000_total": 18,
+            "window_base_0x85c00000_in_cleartext": 17,
+            "feature_host_base_0x823800_in_cleartext": 1,
+            "PLM_0x85c00004_total": 1,
+            "PLM_0x85c00004_in_cleartext": 0,
+            "SS0_0x85c0001c": 0,
+            "SS1_0x85c00020": 0,
+            "lui_window_base_in_code": 0
+          },
+          "correction": "An earlier note claimed a cleartext PLM (0x85c00004) literal in the GSP blob. Local-entropy analysis shows that single occurrence is inside an encrypted region (H~7.15) and is not a valid reference; it is retracted.",
+          "interpretation": "The feature register block (PLM/SS0/SS1) is remapped into a GSP-owned aperture window (0x823800 -> 0x85c00000), confirmed by 17 cleartext window-base descriptor references. There is NO cleartext reference anywhere to SS0 or SS1, by GSP aperture address or host address, and no lui that forms the window base in code. Because the GSP-RM RISC-V code is encrypted/signed, a GSP selector writer can be neither confirmed nor ruled out by static disassembly; the cleartext data only proves the feature block is mapped as a GSP aperture, not that any routine writes window+0x1c/+0x20."
+        }
+      },
+      "note": "The dispatch chain is derived from static call/data flow and branch predicates. Both branch targets converge on a runtime HAL-dispatch + aperture-mapping boundary; no runtime proof confirms selector-address writes or FEAT_OVR privilege transition."
+    },
+    "direct_selector_le32_hits": 0,
+    "script_execution_proven": false,
+    "selector_write_proven": false,
+    "note": "Static decoding establishes buffer handling and format comparisons only. Query helpers are inferred from argument/data flow, not resolved NVIDIA private symbols or observed registry accesses. Runtime-function entries may be fragments. No authenticated MMIO writer or GA107-specific script dispatch has been identified."
+  }
+}

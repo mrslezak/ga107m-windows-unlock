@@ -12,15 +12,35 @@
  * (command=0x0000) until the driver binds, so RUN00's register/PROM reads were
  * erased-flash values; the experimental build enables decode itself first.
  */
+/* Board identity. Default is the validated HP RTX 3050 Ti card above.
+ * Define GU_BOARD_GGNC51518 for a READ-ONLY preflight on the GPU Company
+ * GGNC51518 RTX 3050 laptop (PCI 10de:25a2, subsystem 1140:1d05, iGPU
+ * 8086:9a68). These identity pins only select which PCI device the preflight
+ * inventories; the cold-profile pins below remain HP-specific and are NOT
+ * valid for an experimental/write build on that board. Do not build the
+ * experimental unlock with GU_BOARD_GGNC51518 until this board's own cold
+ * profile has been captured from its REPORT.TXT. */
+#if defined(GU_BOARD_GGNC51518)
+#define GU_BOARD_ID 0x25a210deU
+#define GU_BOARD_SUBSYSTEM 0x11401d05U
+#define GU_BOARD_CLASS_DWORD 0x030000a1U
+#define GU_IGPU_ID 0x9a688086U
+#define GU_IGPU_SUBSYSTEM 0x11401d05U
+/* PROM hash from this card's decode-enabled probe (GA107M-PROBE RUN00 post-decode). */
+#define GU_BOARD_PROM_SHA256 "9d497ef20f0aec6131f87686cadeda3341b97b8fb0e3587a2aa37b63b907d607"
+#else
 #define GU_BOARD_ID 0x25a010deU
 #define GU_BOARD_SUBSYSTEM 0x88e5103cU
+#define GU_BOARD_CLASS_DWORD 0x030200a1U
 #define GU_IGPU_ID 0x9a498086U
 #define GU_IGPU_SUBSYSTEM 0x88e5103cU
+#define GU_BOARD_PROM_SHA256 "84e2444773201c9fd74d6e8984bf01d771433879f86e1c94dc91b2702f7949d7"
+#endif
 #define GU_BAR0_BASE 0x52000000ULL /* observed RUN00 base; length-pinned, base latched per boot */
 #define GU_DEVICE_MEMORY_SIZE 0x1000U
 /* Exact-card cold-state profile. Values marked PENDING need one
  * decode-enabled cold read; the experimental build fails closed on them. */
-#define GU_CARD_PROFILE_PROM_SHA256 "84e2444773201c9fd74d6e8984bf01d771433879f86e1c94dc91b2702f7949d7"
+#define GU_CARD_PROFILE_PROM_SHA256 GU_BOARD_PROM_SHA256
 /* Cold pins transcribed from GA107M-PROBE RUN03 (decode-enabled read):
  *   cold state: command=0x100002 chip=0xb77000a1 gfw=0x8b8f/0x3ff/0x10
  *   WPR2_HI=0 SS0=0x53520035 SS1=0x5 memory=0x1000

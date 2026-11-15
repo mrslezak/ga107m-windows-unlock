@@ -142,15 +142,15 @@ static EFI_STATUS ConfigCheck(BOOLEAN Save) {
   if(EFI_ERROR(status))return status;
   status=ReadConfig(config);if(EFI_ERROR(status))return status;
   BOOLEAN checked=GuCheckConfig(config,segment,bus,device,function,&caps);
-  /* GA107M laptop: class is 0x030200 (VGA-compatible controller, not 0x030000).
+  /* GA107M laptop: class dword is board-pinned via GU_BOARD_CLASS_DWORD.
    * BAR0 base is assigned by firmware each boot and latched from the
    * descriptor in BarCheck, so it is not pinned as a config dword here.
    * caps.pcie is only valid when the structural parse succeeded. */
-  BOOLEAN valid=checked && config[2]==0x030200a1 &&
+  BOOLEAN valid=checked && config[2]==GU_BOARD_CLASS_DWORD &&
     config[GU_EXPECTED_CONFIG_CAP_OFFSET/4]==GU_EXPECTED_CONFIG_CAP_VALUE &&
     !(config[(caps.pcie+8)/4]&0x00200000U);
   if(checked)GuLog("config profile: class_pin=%u cap_dword_pin=%u devctl_relaxed=%u\n",
-    (unsigned)(config[2]==0x030200a1),
+    (unsigned)(config[2]==GU_BOARD_CLASS_DWORD),
     (unsigned)(config[GU_EXPECTED_CONFIG_CAP_OFFSET/4]==GU_EXPECTED_CONFIG_CAP_VALUE),
     (unsigned)!!(config[(caps.pcie+8)/4]&0x00200000U));
 #if GU_PREFLIGHT_ONLY
@@ -163,7 +163,7 @@ static EFI_STATUS ConfigCheck(BOOLEAN Save) {
   UINT16 cmd=(UINT16)(config[1]&0xffffU);
   BOOLEAN cold_hidden=config[0]==GU_BOARD_ID &&
     config[0x2c/4]==GU_BOARD_SUBSYSTEM &&
-    (config[2]>>24)==3 && (config[2]&0xff)==0x02 && config[2]==0x030200a1 &&
+    (config[2]>>24)==3 && (config[2]&0xff)==0x02 && config[2]==GU_BOARD_CLASS_DWORD &&
     ((config[3]>>16)&0x7fU)==0 && (cmd&0x0002U)==0;
   GuLog("preflight cold decode classification: hidden=%u command=%#x\n",
     (unsigned)(cold_hidden?1:0),(unsigned)cmd);
@@ -205,7 +205,7 @@ static EFI_STATUS ConfigCheck(BOOLEAN Save) {
    *   with its exact offset logged. */
   if(Save) {
     if(config[0]!=GU_BOARD_ID || config[0x2c/4]!=GU_BOARD_SUBSYSTEM ||
-       config[2]!=0x030200a1)return EFI_UNSUPPORTED;
+       config[2]!=GU_BOARD_CLASS_DWORD)return EFI_UNSUPPORTED;
     memcpy(InitialConfig,config,sizeof(InitialConfig));
     return EFI_SUCCESS;
   }

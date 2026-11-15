@@ -1,5 +1,38 @@
 # Changes
 
+## 2026-11-14 — VBIOS override phase 2: gated patch generation
+
+- `tools/vbios_patch.py` generates a modified image from one original capture. It refuses
+  unless a vault verifies and holds that exact ROM, and unless the selector scan reports an
+  editable candidate; the documented phase gate is enforced in code, not only in prose.
+- Each edit is stated as OFFSET=EXPECTED:REPLACEMENT with equal-length hex runs, so a stale
+  offset fails closed. Edits intersecting a signed FWSEC region, overlapping each other,
+  leaving the image or changing nothing are rejected.
+- Checksums the original held are restored through a validated pad byte; an image that never
+  summed to zero is reported and left untouched rather than given an invented checksum. The
+  patched image is re-parsed and must keep the option ROM geometry and the FWSEC descriptor,
+  image and signature digests byte for byte.
+- Offline synthetic tests only (`tools/test_vbios_patch.py`). No hardware was read or written,
+  no card ROM was modified and nothing was flashed. The assessment's conclusion is unchanged:
+  no unsigned, executed selector init path has been located on this evidence, so no patched
+  image for this card follows from it yet.
+## 2026-11-14 — VBIOS override phase 1: selector scan and original-image custody
+
+- `tools/vbios_devinit.py` scans a locally captured PROM dump for 32-bit references to
+  the feature-selector window (feature PLM, SS0, SS1), classifies each against the signed
+  FWSEC regions and the option-ROM image chain, and enumerates BIT tokens. It decodes no
+  init bytecode and verifies no signature; a hit outside the signed regions is a
+  candidate, not a demonstrated write path.
+- `tools/vbios_vault.py` stores the original VBIOS from two or more agreeing captures,
+  pins the digest to `GU_CARD_PROFILE_PROM_SHA256` in `unlock/port.h`, writes redundant
+  digest-protected copies, and verifies them before naming a restore copy. It never
+  accesses the GPU and never flashes.
+- docs/GA107M-VBIOS-FEASIBILITY.en.md records both tools and the phase gate: no patched
+  image is produced until this card's own capture is scanned and a vault verifies.
+- Offline synthetic tests only (`tools/test_vbios_devinit.py`, `tools/test_vbios_vault.py`).
+  No hardware was read or written and no ROM was modified. The assessment's conclusion is
+  unchanged: no unsigned, editable selector init path has been located on this evidence.
+
 ## 2026-10-25 — RUN05: SS1=0x8 TF32 doubling verified on hardware
 
 - Third clean transaction (RUN05, `entryLatchedSs1Full`): SS0=0x88888888
