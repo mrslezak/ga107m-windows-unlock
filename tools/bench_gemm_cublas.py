@@ -176,7 +176,8 @@ results["BF16 in / FP32 acc"] = run_case("BF16 in / FP32 acc", buf_bf16, N * N *
 # TF32 and pedantic FP32 share one set of FP32 inputs, as in bench_gemm.py.
 a32, b32, c32 = buf_fp32(), buf_fp32(), DeviceBuffer(N * N * 4)
 results["TF32 in / FP32 acc"] = bench(a32, b32, c32, "TF32 in / FP32 acc", R_32F, COMPUTE_32F_TF32)
-results["FP32 (pedantic)"] = bench(a32, b32, c32, "FP32 (pedantic)", R_32F, COMPUTE_32F_PEDANTIC)
+# Torch's "pedantic" row is plain COMPUTE_32F with TF32 off, not CUBLAS_COMPUTE_32F_PEDANTIC.
+results["FP32 (pedantic)"] = bench(a32, b32, c32, "FP32 (pedantic)", R_32F, COMPUTE_32F)
 for buf in (a32, b32, c32):
     buf.free()
 
