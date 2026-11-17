@@ -1,17 +1,98 @@
-# GA107M Windows GPU Unlock (RTX 3050 Ti Laptop)
+# GA107M Windows GPU Unlock (RTX 3050 / 3050 Ti Laptop)
+
+Quickstart (recommended):
+
+1. Run `tools\new-machine-wizard.cmd`.
+2. Choose **Step 1** and write/stage the probe USB.
+3. Boot once from USB and collect `REPORT.TXT`.
+4. Run the wizard again and choose **Step 2** to build/write final USB.
+5. After Windows boot, set up the SYSTEM hold task (recommended below).
+
+If firmware assets are missing, the flow prompts you to run
+`tools\firmware\build-assets.cmd`.
+
+## Required Before Step 1
+
+- Use a dedicated 4 GB+ USB drive.
+- The flow can format that USB as FAT32 (`-UsbFormat`), which erases files.
+- Back up the USB first.
+
+Asset pipeline details (pinned inputs, hashes, validation):
+[docs/ASSETS.en.md](docs/ASSETS.en.md).
+
+## Defaults Used by the Wizard
+
+- Profile default is `entryLatchedSs1Full` (SS0 + SS1 path).
+- Step 1 captures probe output; Step 2 builds the final unlock from `REPORT.TXT`.
+- Manual decode/preflight tools are still available for advanced workflows.
 
 **English only** | Upstream: [impacifist/Windows-GPU-UNLOCK](https://github.com/impacifist/Windows-GPU-UNLOCK) (RTX 3090 FE) — this repository is a fork carrying a port to a laptop GPU.
 
-Experimental UEFI unlock and direct Windows handoff for one documented
-**HP RTX 3050 Ti Laptop GPU (GA107M)** system, plus a **read-only preflight**
-and a **decode probe** for collecting the values needed to pin your own card.
-Source-only, as upstream: no firmware assets or built EFI binaries are
-bundled. You should compile them on your own machine just in case.
+This remains an experimental UEFI unlock/direct handoff flow with documented
+results on two GA107M laptop GPU systems (RTX 3050 Ti Laptop GPU and RTX 3050
+Laptop GPU). This repository is source-only: firmware assets and built EFI
+binaries are not redistributed.
 
-**Hardware result (this machine, 2026-10-25):** the full transaction executed
-twice from UEFI before the Windows driver bound — FWSEC clean, V67 staged,
-`SS0=0x88888888` written and verified pre- and post-FLR, clean handoff — and
-with the dGPU kept out of runtime D3cold, Windows measured:
+## Persistence on Windows (Recommended Path)
+
+Persistence is not automatic on laptops: Windows runtime D3cold can power-gate
+the dGPU, and selector values reset on a new cold init.
+
+Use this path first:
+
+1. Run `tools/setup-hold-task-at-boot.ps1` from an elevated PowerShell.
+2. This installs a SYSTEM startup Scheduled Task running
+   `tools/hold_gpu_cuda.py` (AC-only).
+3. Confirm the task is running after boot/logon.
+
+Alternative path (less reliable on some systems):
+
+- `tools/setup-hold-startup.ps1` (per-user Startup shortcut running
+  `tools/hold_gpu_windowed.py`).
+
+Display sleep can interfere with persistence. `powercfg /change
+monitor-timeout-ac <value>` uses minutes (`0` = Never):
+
+```powershell
+# Disable monitor sleep on AC for testing (0 = Never)
+powercfg /change monitor-timeout-ac 0
+
+# Restore monitor sleep after 30 minutes (AC)
+powercfg /change monitor-timeout-ac 30
+```
+
+BitLocker note: decryption is not required. You can temporarily suspend
+protectors for a limited reboot window:
+
+```powershell
+manage-bde -protectors -enable C:
+manage-bde -protectors -disable C: -RebootCount 3
+```
+
+Helper script in this repo:
+
+- `tools/bitlocker-temporary-suspend.ps1`
+
+More detail: [docs/GA107M-PERSISTENCE.en.md](docs/GA107M-PERSISTENCE.en.md).
+
+## Benchmark Results
+
+RTX3050M 4GB VRAM reported results (current machine):
+
+| Workload | Locked | Unlocked |
+|---|---|---|
+| FP16 in / FP32 acc | 405 ops/SM/clk (13.9 TFLOPS) | **763 ops/SM/clk (21.0 TFLOPS)** |
+| BF16 in / FP32 acc | 404 ops/SM/clk (14.1 TFLOPS) | **780 ops/SM/clk (21.9 TFLOPS)** |
+| TF32 in / FP32 acc | 203 ops/SM/clk (7.0 TFLOPS) | **394 ops/SM/clk (11.5 TFLOPS)** |
+| FP32 pedantic | unchanged | **unchanged** |
+
+Notes:
+
+- These values are lower than the earlier fork report below, which is expected
+  across different laptop firmware/power/cooling/governor behavior.
+- These runs used temporary BitLocker protector suspension, not decryption.
+
+Prior fork report (reference machine, 2026-10-25):
 
 | 8192³ GEMM (clock-normalized) | Locked | Unlocked (SS0-only) | Unlocked (SS0+SS1) |
 |---|---|---|---|
@@ -20,22 +101,13 @@ with the dGPU kept out of runtime D3cold, Windows measured:
 | TF32 in / FP32 acc | 252 ops/SM/clk | unchanged (SS1 preserved) | **503 ops/SM/clk (13.1 TFLOPS)** |
 | FP32 pedantic | ~170 ops/SM/clk | unchanged | unchanged |
 
-~55% more measured TFLOPS at ~20% lower power for FP16 GEMM. The SS1=0x8
-opt-in (`entryLatchedSs1Full`) additionally doubles TF32 (256 → 503
-ops/SM/clk) and is **hardware-verified on this card**: RUN05 wrote
-SS0=0x88888888 + SS1=0x8, both verified pre- and post-FLR, clean handoff.
-FP16/BF16 are unaffected by SS1, matching the LG GA107 measurements.
+This is still a narrow validation set (specific laptop firmware/card
+combinations), not a broad compatibility claim across all GA107M laptops.
+Do not attempt this on another laptop without running preflights first.
+Read [docs/GA107M.en.md](docs/GA107M.en.md) and
+[docs/COMPATIBILITY.en.md](docs/COMPATIBILITY.en.md).
 
-**Persistence is not automatic on a laptop.** Windows runtime-D3cold
-power-gates the idle dGPU, and the card's fuse-based init re-programs the
-selectors at every power-on (entry SS0 differs each cold boot). The override
-survives exactly as long as the dGPU never enters D3cold; `hold_gpu_windowed.py`
-keeps a live CUDA context for that. See
-[docs/GA107M-PERSISTENCE.en.md](docs/GA107M-PERSISTENCE.en.md).
-
-This is only verified on my own laptop, with two GPUs, with my specific firmware and card. Do not attempt to run this on any other laptop without at least checking the pre-flights and ensuring it won't break anything. Read [docs/GA107M.en.md](docs/GA107M.en.md) (the port's
-phase-by-phase workflow) and upstream's [compatibility](docs/COMPATIBILITY.en.md)
-notes first.
+## Original Fork Author Notes
 
 This was done because I wanted to experiment with it and see if it can speed up some operations for tinier ML tasks. This isn't useful for every AI task, so depending on your needs it's a waste of time, but development and fine-tuning and image-gen benefit to a degree when not bottlenecked by other things. This might also be patched in the future by some drivers as with some things in the past.
 
@@ -54,7 +126,8 @@ If you want to try it on your own machine, I recommend using AI agents to go thr
 | `unlock/run-cross-tests.sh` + `.ps1` | Cross-host test runner (WSL clang builds, Windows runs) |
 | `docs/GA107M.en.md` | Port workflow: preflight → probe → profile → experimental |
 | `docs/GA107M-PERSISTENCE.en.md` | D3cold persistence analysis with source-dive receipts |
-| `hold_gpu_windowed.py`, `setup-hold-startup.ps1` | Visible, easy-to-quit GPU hold |
+| `hold_gpu_windowed.py`, `hold_gpu_cuda.py`, `setup-hold-startup.ps1`, `setup-hold-task-at-boot.ps1` | User-startup and SYSTEM-startup GPU hold options |
+| `tools/bitlocker-temporary-suspend.ps1` | Temporarily suspend BitLocker protectors for a limited reboot window (no decryption) |
 
 ### Build modes (`unlock/build-wsl.sh`, or upstream `build.ps1` with LLVM)
 
@@ -62,7 +135,7 @@ If you want to try it on your own machine, I recommend using AI agents to go thr
 |---|---|---|
 | `GA107M-PREFLIGHT` | PCI/config/BAR0/GOP inventory | **None** |
 | `GA107M-PROBE` | Inventory + cold registers, real PROM + FWSEC parse for profile transcription | One config write: the PCI MEM decode bit (the same write the driver makes every boot) |
-| `GA107M-EXPERIMENTAL-entryLatchedSs1Preserve` | Exact-card unlock; manual `U` confirmation; one transaction per boot | The transaction itself |
+| `GA107M-EXPERIMENTAL-entryLatchedSs1Full` | Exact-card unlock; manual `U` confirmation; one transaction per boot | The transaction itself |
 
 The experimental build **fails closed** (`#error`) until the exact-card
 profile pins are transcribed from your own probe report. All upstream

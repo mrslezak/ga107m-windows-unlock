@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ga107m-windows-unlock/profile.schema.json",
+  "title": "GA107M Unlock Profile",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "report_path",
+    "board",
+    "igpu",
+    "bar0",
+    "prom_sha256",
+    "cold_pins",
+    "recommended_stock_profile"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "report_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "report_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "board": {
+      "type": "object",
+      "required": ["id", "subsystem", "class_dword", "target_pci_id"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "subsystem": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "class_dword": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "target_pci_id": { "type": "string", "pattern": "^0x[0-9a-f]+$" }
+      },
+      "additionalProperties": false
+    },
+    "igpu": {
+      "type": "object",
+      "required": ["id", "subsystem"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "subsystem": { "type": "string", "pattern": "^0x[0-9a-f]+$" }
+      },
+      "additionalProperties": false
+    },
+    "bar0": {
+      "type": "object",
+      "required": ["base", "size"],
+      "properties": {
+        "base": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "size": { "type": "string", "pattern": "^0x[0-9a-f]+$" }
+      },
+      "additionalProperties": false
+    },
+    "prom_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "cold_pins": {
+      "type": "object",
+      "required": [
+        "chip",
+        "gfw_plm",
+        "gfw_boot",
+        "gfw_cpuctl",
+        "wpr2_hi",
+        "feat_plm",
+        "memory",
+        "ss0",
+        "ss1"
+      ],
+      "properties": {
+        "chip": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "gfw_plm": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "gfw_boot": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "gfw_cpuctl": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "wpr2_hi": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "feat_plm": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "memory": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "ss0": { "type": "string", "pattern": "^0x[0-9a-f]+$" },
+        "ss1": { "type": "string", "pattern": "^0x[0-9a-f]+$" }
+      },
+      "additionalProperties": false
+    },
+    "recommended_stock_profile": {
+      "type": "string",
+      "enum": ["entryLatchedSs1Preserve", "entryLatchedSs1Full"]
+    }
+  },
+  "additionalProperties": false
+}

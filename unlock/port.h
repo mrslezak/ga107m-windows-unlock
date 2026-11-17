@@ -21,38 +21,84 @@
  * experimental unlock with GU_BOARD_GGNC51518 until this board's own cold
  * profile has been captured from its REPORT.TXT. */
 #if defined(GU_BOARD_GGNC51518)
+#ifndef GU_BOARD_ID
 #define GU_BOARD_ID 0x25a210deU
+#endif
+#ifndef GU_BOARD_SUBSYSTEM
 #define GU_BOARD_SUBSYSTEM 0x11401d05U
+#endif
+#ifndef GU_BOARD_CLASS_DWORD
 #define GU_BOARD_CLASS_DWORD 0x030000a1U
+#endif
+#ifndef GU_IGPU_ID
 #define GU_IGPU_ID 0x9a688086U
+#endif
+#ifndef GU_IGPU_SUBSYSTEM
 #define GU_IGPU_SUBSYSTEM 0x11401d05U
+#endif
 /* PROM hash from this card's decode-enabled probe (GA107M-PROBE RUN00 post-decode). */
+#ifndef GU_BOARD_PROM_SHA256
 #define GU_BOARD_PROM_SHA256 "9d497ef20f0aec6131f87686cadeda3341b97b8fb0e3587a2aa37b63b907d607"
+#endif
 #else
+#ifndef GU_BOARD_ID
 #define GU_BOARD_ID 0x25a010deU
+#endif
+#ifndef GU_BOARD_SUBSYSTEM
 #define GU_BOARD_SUBSYSTEM 0x88e5103cU
+#endif
+#ifndef GU_BOARD_CLASS_DWORD
 #define GU_BOARD_CLASS_DWORD 0x030200a1U
+#endif
+#ifndef GU_IGPU_ID
 #define GU_IGPU_ID 0x9a498086U
+#endif
+#ifndef GU_IGPU_SUBSYSTEM
 #define GU_IGPU_SUBSYSTEM 0x88e5103cU
+#endif
+#ifndef GU_BOARD_PROM_SHA256
 #define GU_BOARD_PROM_SHA256 "84e2444773201c9fd74d6e8984bf01d771433879f86e1c94dc91b2702f7949d7"
 #endif
+#endif
+#ifndef GU_BAR0_BASE
 #define GU_BAR0_BASE 0x52000000ULL /* observed RUN00 base; length-pinned, base latched per boot */
+#endif
+#ifndef GU_DEVICE_MEMORY_SIZE
 #define GU_DEVICE_MEMORY_SIZE 0x1000U
+#endif
 /* Exact-card cold-state profile. Values marked PENDING need one
  * decode-enabled cold read; the experimental build fails closed on them. */
+#ifndef GU_CARD_PROFILE_PROM_SHA256
 #define GU_CARD_PROFILE_PROM_SHA256 GU_BOARD_PROM_SHA256
+#endif
 /* Cold pins transcribed from GA107M-PROBE RUN03 (decode-enabled read):
  *   cold state: command=0x100002 chip=0xb77000a1 gfw=0x8b8f/0x3ff/0x10
  *   WPR2_HI=0 SS0=0x53520035 SS1=0x5 memory=0x1000
  * GFW/FEAT-PLM values match the verified RTX 3090 cold profile exactly. */
+#ifndef GU_EXPECTED_CHIP
 #define GU_EXPECTED_CHIP 0xb77000a1u
+#endif
+#ifndef GU_EXPECTED_GFW_PLM
 #define GU_EXPECTED_GFW_PLM 0x8b8fu
+#endif
+#ifndef GU_EXPECTED_GFW_BOOT
 #define GU_EXPECTED_GFW_BOOT 0x3ffu
+#endif
+#ifndef GU_EXPECTED_GFW_CPUCTL
 #define GU_EXPECTED_GFW_CPUCTL 0x10u
+#endif
+#ifndef GU_EXPECTED_WPR2_HI
 #define GU_EXPECTED_WPR2_HI 0x0u
+#endif
+#ifndef GU_EXPECTED_FEAT_PLM
 #define GU_EXPECTED_FEAT_PLM 0xffffff8fu
+#endif
+#ifndef GU_EXPECTED_CONFIG_CAP_OFFSET
 #define GU_EXPECTED_CONFIG_CAP_OFFSET 0xc8
+#endif
+#ifndef GU_EXPECTED_CONFIG_CAP_VALUE
 #define GU_EXPECTED_CONFIG_CAP_VALUE 0x00050011u
+#endif
 #define GU_PROFILE_READY 1
 #if defined(GU_EXPERIMENTAL_3090) && !GU_PROFILE_READY && __STDC_HOSTED__ != 1
 #error "GA107M exact-card cold pins are not transcribed from a decode-enabled preflight yet"

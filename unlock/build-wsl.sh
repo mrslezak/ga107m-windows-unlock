@@ -7,10 +7,10 @@ cd "$(dirname "$0")"
 CLANG=${CLANG:-clang}
 LLD_LINK=${LLD_LINK:-lld-link}
 EXPERIMENTAL=0
-PROFILE=entryLatchedSs1Preserve
+PROFILE=entryLatchedSs1Full
 if [ "$1" = "--experimental" ]; then
   EXPERIMENTAL=1
-  PROFILE=${2:-entryLatchedSs1Preserve}
+  PROFILE=${2:-entryLatchedSs1Full}
   case "$PROFILE" in
     entryLatchedSs1Preserve|entryLatchedSs1Full) ;;
     *) echo "profile must be entryLatchedSs1Preserve or entryLatchedSs1Full" >&2; exit 2 ;;
